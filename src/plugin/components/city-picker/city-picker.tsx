@@ -40,6 +40,7 @@ const _defaultProps = {
   single: true,
   color: '#1aad19',
   textColor: '#fff',
+  openState: false,
   height: '400',
   indicatorStyle:'height: 50rpx;',
   indicatorClass:'',

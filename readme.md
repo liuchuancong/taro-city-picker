@@ -2,8 +2,6 @@
 
 小程序中国地区选择器
 
-
-
 ## 使用
 
 - 下载项目代码
@@ -38,55 +36,83 @@ npm run dev:qq # qq小程序
 
 ## 项目中使用
 
-- 在代码中 import 并按照文档说明使用
+- 进入目录安装依赖，国内用户推荐使用 cnpm 进行加速
+- npm 使用方式移步[仓库地址](https://www.npmjs.com/package/city_pickers)
 
 ```bash
-import NavBar from 'taro-navigationbar';
+ npm i city_pickers --save
+```
+
+```bash
+import CityPicker from 'city_pickers'
 ```
 
 ## 示例代码
 
 ```bash
-<!--WXML示例代码-->
-<NavBar
-          title='有返回和home'
-          background='#fff'
-          back
-          home
-          onBack={this.handlerGobackClick}
-          onHome={this.handlerGohomeClick}
+import Taro, { Component } from '@tarojs/taro'
+import { View, Text } from '@tarojs/components'
+import './index.scss'
+import CityPicker from 'city_pickers'
+export default class Index extends Component {
+
+  state = {
+    isOpen: false
+  };
+  constructor(props){
+    super(props);
+    this.togglePicker = this.togglePicker.bind(this);
+    this.getPickerSelected = this.getPickerSelected.bind(this);
+  }
+  togglePicker() {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+  }
+  getPickerSelected(val) {
+    this.togglePicker();
+    console.log(val);
+  }
+  config = {
+    navigationBarTitleText: '首页'
+  }
+
+  render () {
+    return (
+      <View className='index'>
+        <Text>Hello world!</Text>
+        <CityPicker
+          openState
+          onPickerClose={this.togglePicker}
+          onPickerConfirm={this.getPickerSelected}
         />
+      </View>
+    )
+  }
+}
+
 ```
 
-更多使用方式请移步[仓库地址](https://github.com/lingxiaoyi/Taro-navigation-bar)查看 demo 和使用方式.
+更多使用方式请移步[仓库地址](https://github.com/liuchuancong/taro-city-picker)查看 demo 和使用方式.
 
 ## 属性列表
 
-| 属性               | 类型         | 默认值     | 必填 | 说明                                                                                                                       |
-| ------------------ | ------------ | ---------- | ---- | -------------------------------------------------------------------------------------------------------------------------- |
-| ext-class          | string       |            | 否   | 添加在组件内部结构的 class，可用于修改组件内部的样式                                                                       |
-| title              | string       |            | 否   | 导航标题，如果不提供，则名为 renderCenter 的 slot 有效                                                                     |
-| background         | string       | #ffffff    | 否   | 导航背景色                                                                                                                 |
-| backgroundColorTop | string       | background | 否   | 导航下拉背景色,默认取 background 的颜色,不理解[见 issue 问题](https://github.com/lingxiaoyi/Taro-navigation-bar/issues/15) |
-| color              | string       | #000000    | 否   | 导航字体颜色                                                                                                               |
-| iconTheme          | string       | black      | 否   | 主题图标和字体颜色,当背景色为深色时,可以设置'white'                                                                        |
-| back               | boolean      | false      | 否   | 是否显示返回按钮，默认点击按钮会执行 navigateBack，如果为 false，则名为 renderLeft 的 slot 有效                            |
-| home               | boolean      | false      | 否   | 是否显示 home 按钮，执行方法自定义,或者看例子                                                                              |
-| searchBar          | boolean      | false      | 否   | 是否显示搜索框，默认点击按钮会执行 onSearch，如果为 false，则名为 renderCenter 的 slot 有效                                |
-| searchText         | string       | 点我搜索   | 否   | 搜索框文字                                                                                                                 |
-| onHome             | eventhandler |            | 否   | 在 home 为 true 时，点击 home 按钮触发此事件                                                                               |
-| onBack             | venthandler  |            | 否   | 在 back 为 true 时，点击 back 按钮触发此事件，detail 包含 delta                                                            |
-| onSearch           | eventhandler |            | 否   | 在 searchBar 为 true 时，点击 search 按钮触发此事件                                                                        |
+| 属性               | 类型         | 默认值                        | 必填 | 说明      |
+| -----------------  | ------------ | -----------------------------| ---- | ----------------------- |
+| selecedLocation    | Array        |["110000", "110100", "110101"]| 否   |                                                               |
+| single             | boolean      |                              | 否   | 下方是否出现两个按钮             |
+| color              | string       | #1aad19                      | 否   | 确定按钮的背景颜色  |
+| textColor          | string       | #fff                         | 否   | 确定按钮的文字颜色 |
+| indicatorStyle     | string       | 'height: 50rpx;'             | 否   | indicatorStyle   |
+| indicatorClass     | string       |                              | 否   | indicatorClass|    |
+| maskClass          | string       |                              | 否   | maskClass                            |
+| maskStyle          | string       |                              | 否   | maskStyle       |
+| openState          | boolean      | false                        | 是   | 控制选择器的打开和关闭             |
+| height             | string       |                              | 否   | 选择器container的高         |
+| `onPickerClose()`  | Function     |                              | 是   | 点击选择器取消或者背景时触发                                                             |
+| `onPickerConfirm()`| Function     |                              | 是   | 点击选择器确定时触发,可以拿到回调信息  
 
-## 注意
-
-- iconTheme 设置为 white 的时候,一定要记得自己去 json 文件设置"navigationBarTextStyle": "white"
-- 跳转搜索页面,在 Android 机子会出现文字被键盘弹起顶出 input 框,解决方案是页面设置一个死的高度不要高于 windowHeight - navheight. 例子中是写死 500px,或者可以在 didMount 中通过 JS 计算赋值页面高度.
-- input 框文字抖动问题我是借鉴别人写的,可以最大限度减小文字抖动的大小,提升用户体验.
-- title searchBar renderCenter 如果全部有内容,是这样的先后显示顺序.
-- 默认配置满足不了功能的,请使用 slot 功能,见例子 1 6 7[仓库地址](https://github.com/lingxiaoyi/Taro-navigation-bar)
-- 由于本人精力有限,只测试了常规的 20 多款手机.如有哪种机型出现问题,请备注机型和小程序版本库.本人会以最快方式解决问题.
-- 用法和测试 demo 请 clone 代码[仓库地址](https://github.com/lingxiaoyi/Taro-navigation-bar)
+更多使用方式请移步[微信参考文档](https://developers.weixin.qq.com/miniprogram/dev/component/picker-view.html)查看属性和使用方式.
 
 ## 后续
 
@@ -95,4 +121,3 @@ import NavBar from 'taro-navigationbar';
 ~
 创作不易,如果对你有帮助，请给个星星 star✨✨ 谢谢
 ~
-
