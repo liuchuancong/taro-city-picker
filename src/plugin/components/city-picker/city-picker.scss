@@ -1,0 +1,117 @@
+.float-layout {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  z-index: 810;
+  transition: visibility 300ms cubic-bezier(0.36, 0.66, 0.04, 1);
+  &.active {
+    visibility: visible;
+    .float-layout__overlay {
+      opacity: 1;
+    }
+    .float-layout__container {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+}
+.float-layout__overlay {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition: opacity 150ms ease-in;
+}
+.float-layout__container {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  max-height: 950rpx;
+  background-color: #fff;
+  transform: translate3d(0, 100%, 0);
+  transition: -webkit-transform 300ms cubic-bezier(0.36, 0.66, 0.04, 1);
+  transition: transform 300ms cubic-bezier(0.36, 0.66, 0.04, 1);
+  transition: transform 300ms cubic-bezier(0.36, 0.66, 0.04, 1),
+    -webkit-transform 300ms cubic-bezier(0.36, 0.66, 0.04, 1);
+}
+
+.float-layout .layout-header {
+  position: relative;
+  padding: 20rpx 33rpx;
+  text-align: left;
+  border-bottom: 1px solid #eeeeee;
+}
+.float-layout .layout-body {
+  font-size: 28rpx;
+  padding: 20rpx;
+  overflow-y: scroll;
+}
+.float-layout .layout-body__content {
+  position: relative;
+  overflow-y: scroll;
+}
+.layout-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 33rpx;
+  .btn {
+    display: flex;
+    align-items: center;
+    padding: 20rpx 0;
+  }
+  .btn-single{
+    padding: 20rpx 0;
+    display: block;
+    width: 100%;
+  }
+}
+.picker-text-line {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .text-style {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    box-lines: single;
+  }
+}
+.picker-header {
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #333;
+  display: block;
+  box-sizing: border-box;
+  .text {
+    font-size: 28rpx;
+  }
+}
+.layout-footer-button {
+  display: flex;
+  width: 160rpx;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 30rpx;
+}
+.layout-footer-button-single{
+  display: block;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 30rpx;
+}
+.border-radius {
+  border-radius: 15rpx;
+}
+
+
+

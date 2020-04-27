@@ -1,0 +1,9 @@
+{
+  "publicComponents": {
+    "city-picker": "components/city-picker/city-picker"
+  },
+  "pages": {
+
+  },
+    "main": "index.js"
+  }

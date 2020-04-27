@@ -1,0 +1,6 @@
+<block wx:if="{{$taroCompReady}}">
+    <view class="index">
+        <button bindtap="anonymousFunc0">{{isOpen ? "关闭" : "打开"}}picker</button>
+        <city-picker extraProps="{{extraProps}}"></city-picker>
+    </view>
+</block>
