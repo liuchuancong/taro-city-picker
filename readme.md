@@ -1,6 +1,6 @@
 # 小程序组件 taro-city-picker
 
-小程序中国地区选择器
+小程序中国地区选择器，采用动态数据渲染，避免第一次打开全部预读所有数据。ui可以自定义，让你的小程序更加完美！
 
 ## 使用
 
@@ -9,20 +9,6 @@
 ```bash
 git clone https://github.com/liuchuancong/taro-city-picker.git
 ```
-
-- 进入目录安装依赖，国内用户推荐使用 cnpm 进行加速
-
-```bash
-npm i
-```
-
-或者
-
-```bash
-yarn  i
-```
-
-或借助 cnpm 加速
 
 - 启动本地服务器
 
