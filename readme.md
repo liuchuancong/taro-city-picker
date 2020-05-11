@@ -22,12 +22,6 @@ npm run dev:qq # qq小程序
 
 ## 项目中使用
 
-- 进入目录安装依赖，国内用户推荐使用 cnpm 进行加速
-- npm 使用方式移步[仓库地址](https://www.npmjs.com/package/city_pickers)
-
-```bash
- npm i city_pickers --save
-```
 
 ```bash
 import CityPicker from 'city_pickers'
